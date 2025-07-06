@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meme_editor_app/ui/home/home_viewmodel.dart';
@@ -13,13 +12,34 @@ class HomeView extends StatelessWidget {
     final vm = context.watch<HomeViewModel>();
 
     Future.microtask(() {
-      if (vm.memes.isEmpty && !vm.isLoading && vm.error.isEmpty) {
+      if (vm.allMemes.isEmpty && !vm.isLoading && vm.error.isEmpty) {
         vm.fetchMemes(context);
       }
     });
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Meme Editor')),
+      appBar: AppBar(
+        title: const Text('Meme Editor'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: TextField(
+              onChanged: vm.updateSearch,
+              decoration: InputDecoration(
+                hintText: 'Search memes...',
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+              ),
+            ),
+          ),
+        ),
+      ),
       body: RefreshIndicator(
         onRefresh: () => vm.fetchMemes(context),
         child: vm.isLoading

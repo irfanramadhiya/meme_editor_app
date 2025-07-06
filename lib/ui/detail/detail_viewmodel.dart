@@ -4,6 +4,7 @@ import 'package:meme_editor_app/model/text_overlay.dart';
 class DetailViewModel extends ChangeNotifier {
   List<TextOverlay> overlays = [];
   final List<List<TextOverlay>> _history = [];
+  final List<List<TextOverlay>> _redoStack = [];
 
   void addText(BuildContext context) async {
     final controller = TextEditingController();
@@ -31,7 +32,16 @@ class DetailViewModel extends ChangeNotifier {
 
     if (text != null && text.trim().isNotEmpty) {
       _saveToHistory();
+      _redoStack.clear();
       overlays.add(TextOverlay(text: text.trim(), x: 0.8, y: 0.4));
+      notifyListeners();
+    }
+  }
+
+  void redo() {
+    if (_redoStack.isNotEmpty) {
+      _history.add(List<TextOverlay>.from(overlays.map((e) => e.copyWith())));
+      overlays = _redoStack.removeLast();
       notifyListeners();
     }
   }
@@ -47,6 +57,7 @@ class DetailViewModel extends ChangeNotifier {
 
   void undo() {
     if (_history.isNotEmpty) {
+      _redoStack.add(List<TextOverlay>.from(overlays.map((e) => e.copyWith())));
       overlays = _history.removeLast();
       notifyListeners();
     }

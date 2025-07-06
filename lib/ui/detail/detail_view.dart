@@ -29,6 +29,7 @@ class DetailView extends StatelessWidget {
             icon: Icon(Icons.download),
           ),
           IconButton(onPressed: vm.undo, icon: const Icon(Icons.undo)),
+          IconButton(icon: const Icon(Icons.redo), onPressed: vm.redo),
         ],
       ),
       floatingActionButton: FloatingActionButton(

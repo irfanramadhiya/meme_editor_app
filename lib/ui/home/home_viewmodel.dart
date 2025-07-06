@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meme_editor_app/model/meme.dart';
@@ -14,12 +13,39 @@ class HomeViewModel extends ChangeNotifier {
 
   final memeBox = Hive.box<Meme>('memes');
 
+  List<Meme> allMemes = [];
+  String _searchQuery = '';
+
+  void setMemes(List<Meme> loadedMemes) {
+    allMemes = loadedMemes;
+    _applySearch();
+  }
+
+  void updateSearch(String query) {
+    _searchQuery = query;
+    _applySearch();
+  }
+
+  void _applySearch() {
+    if (_searchQuery.isEmpty) {
+      memes = allMemes;
+    } else {
+      memes = allMemes
+          .where(
+            (meme) =>
+                meme.name.toLowerCase().contains(_searchQuery.toLowerCase()),
+          )
+          .toList();
+    }
+    notifyListeners();
+  }
+
   Future<void> fetchMemes(BuildContext context) async {
     isLoading = true;
     notifyListeners();
     print("${memeBox.length} length ===========");
     try {
-      final apiMemes = await ApiService().fetchMemes(); // Get from API
+      final apiMemes = await ApiService().fetchMemes();
       for (var meme in apiMemes) {
         final localFile = await _downloadAndSave(meme.url, meme.id);
         final memeWithPath = Meme(
@@ -34,15 +60,17 @@ class HomeViewModel extends ChangeNotifier {
         );
         await memeBox.put(meme.id, memeWithPath);
       }
-      memes = memeBox.values.toList();
+      setMemes(memeBox.values.toList());
 
       error = '';
     } catch (e) {
       if (memeBox.isNotEmpty) {
         memes = memeBox.values.toList();
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Something went wrong please check your internet')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Something went wrong please check your internet'),
+          ),
+        );
       } else {
         error = e.toString();
       }
