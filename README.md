@@ -56,7 +56,7 @@ flutter build apk --release
 Saved memes are stored in:
 
 ```
-/storage/emulated/0/Android/data/<your.package.name>/files/MyImages/
+/Android/data/com.example.meme_editor_app/files/MyImages
 ```
 
 This is **not the Gallery** by default. You can access it via:
