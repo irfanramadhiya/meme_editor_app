@@ -19,7 +19,7 @@ class DetailViewModel extends ChangeNotifier {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(), // cancel
+            onPressed: () => Navigator.of(context).pop(),
             child: const Text('Cancel'),
           ),
           TextButton(
@@ -46,6 +46,14 @@ class DetailViewModel extends ChangeNotifier {
     }
   }
 
+  void undo() {
+    if (_history.isNotEmpty) {
+      _redoStack.add(List<TextOverlay>.from(overlays.map((e) => e.copyWith())));
+      overlays = _history.removeLast();
+      notifyListeners();
+    }
+  }
+
   void moveOverlay(int index, Offset delta, Size imageSize) {
     final overlay = overlays[index];
     overlays[index] = overlay.copyWith(
@@ -53,14 +61,6 @@ class DetailViewModel extends ChangeNotifier {
       y: (overlay.y + delta.dy / imageSize.height).clamp(0.0, 1.0),
     );
     notifyListeners();
-  }
-
-  void undo() {
-    if (_history.isNotEmpty) {
-      _redoStack.add(List<TextOverlay>.from(overlays.map((e) => e.copyWith())));
-      overlays = _history.removeLast();
-      notifyListeners();
-    }
   }
 
   void _saveToHistory() {

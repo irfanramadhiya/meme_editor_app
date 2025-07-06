@@ -43,7 +43,6 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> fetchMemes(BuildContext context) async {
     isLoading = true;
     notifyListeners();
-    print("${memeBox.length} length ===========");
     try {
       final apiMemes = await ApiService().fetchMemes();
       for (var meme in apiMemes) {

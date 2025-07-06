@@ -1,7 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:meme_editor_app/model/text_overlay.dart';
 import 'package:meme_editor_app/ui/export/export_viewmodel.dart';
+import 'package:meme_editor_app/ui/widgets/meme_canvas.dart';
 import 'package:provider/provider.dart';
 
 class ExportView extends StatelessWidget {
@@ -14,7 +14,18 @@ class ExportView extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.watch<ExportViewmodel>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Export Meme')),
+      appBar: AppBar(
+        title: const Text('Export Meme'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () async {
+              await vm.shareMeme();
+            },
+          ),
+        ],
+      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await vm.saveMemeImage();
@@ -23,37 +34,10 @@ class ExportView extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final imageSize = Size(constraints.maxWidth, constraints.maxHeight);
           return Center(
             child: RepaintBoundary(
               key: vm.key,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Image.file(
-                      File(memeUrl),
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.error),
-                    ),
-                  ),
-                  ...overlays.map((overlay) {
-                    final left = overlay.x * imageSize.width;
-                    final top = overlay.y * imageSize.height;
-                    return Positioned(
-                      left: left,
-                      top: top,
-                      child: Text(
-                        overlay.text,
-                        style: TextStyle(
-                          fontSize: overlay.fontSize,
-                          color: Colors.black,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ],
-              ),
+              child: MemeCanvas(imagePath: memeUrl, overlays: overlays)
             ),
           );
         },

@@ -24,19 +24,7 @@ class HomeView extends StatelessWidget {
           preferredSize: const Size.fromHeight(48),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: TextField(
-              onChanged: vm.updateSearch,
-              decoration: InputDecoration(
-                hintText: 'Search memes...',
-                filled: true,
-                fillColor: Colors.white,
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
-              ),
-            ),
+            child: MemeSearchBar(onChanged: vm.updateSearch),
           ),
         ),
       ),
@@ -67,6 +55,30 @@ class HomeView extends StatelessWidget {
                   );
                 },
               ),
+      ),
+    );
+  }
+}
+
+class MemeSearchBar extends StatelessWidget {
+  final ValueChanged<String> onChanged;
+
+  const MemeSearchBar({super.key, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: TextField(
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          hintText: 'Search memes...',
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0),
+        ),
       ),
     );
   }
