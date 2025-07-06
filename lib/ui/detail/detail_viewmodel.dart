@@ -11,7 +11,7 @@ class DetailViewModel extends ChangeNotifier {
     final text = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Enter Meme Text'),
+        title: const Text('Enter Meme Text or Add Sticker'),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -24,7 +24,12 @@ class DetailViewModel extends ChangeNotifier {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('Add'),
+            child: const Text('Add Text'),
+          ),
+          TextButton(
+            onPressed: () =>
+                Navigator.of(context).pop('😂'),
+            child: const Text('Add Sticker 😂'),
           ),
         ],
       ),
@@ -36,6 +41,13 @@ class DetailViewModel extends ChangeNotifier {
       overlays.add(TextOverlay(text: text.trim(), x: 0.8, y: 0.4));
       notifyListeners();
     }
+  }
+
+  void addSticker(String emoji) {
+    _saveToHistory();
+    _redoStack.clear();
+    overlays.add(TextOverlay(text: emoji, x: 0.8, y: 0.4));
+    notifyListeners();
   }
 
   void redo() {
