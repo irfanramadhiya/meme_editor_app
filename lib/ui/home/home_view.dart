@@ -11,6 +11,12 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.watch<HomeViewModel>();
 
+    Future.microtask(() {
+      if (vm.memes.isEmpty && !vm.isLoading && vm.error.isEmpty) {
+        vm.fetchMemes();
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(title: const Text('Meme Editor')),
       body: RefreshIndicator(
