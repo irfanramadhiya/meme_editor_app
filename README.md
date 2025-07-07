@@ -75,7 +75,7 @@ Note: This folder is **not visible in the gallery by default**. You can view the
 
 ## 🎥 Showcase Video
  
-🚧 Link: https://drive.google.com/file/d/1P1AqUBxpGAVRf3NHaZc3qcJ3GEUosc7Y/view?usp=drivesdk
+Link: https://drive.google.com/file/d/1P1AqUBxpGAVRf3NHaZc3qcJ3GEUosc7Y/view?usp=drivesdk
 
 ---
 
