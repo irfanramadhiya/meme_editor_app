@@ -53,9 +53,7 @@ flutter build apk --release
 
 ## 🧪 Running Unit Tests
 
-This app includes unit tests for core logic like search and undo/redo.
-
-To run all tests:
+To run the unit test:
 ```bash
 flutter test test/detail_viewmodel_test.dart
 ```
@@ -76,9 +74,8 @@ Note: This folder is **not visible in the gallery by default**. You can view the
 ---
 
 ## 🎥 Showcase Video
-
-Coming soon!  
-🚧 Link: [YouTube - Meme Editor App Demo](https://youtu.be/YOUR_VIDEO_ID) *(Replace with actual link when ready)*
+ 
+🚧 Link: https://drive.google.com/file/d/1P1AqUBxpGAVRf3NHaZc3qcJ3GEUosc7Y/view?usp=drivesdk
 
 ---
 
