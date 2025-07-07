@@ -51,6 +51,18 @@ flutter build apk --release
 
 ---
 
+## 🧪 Running Unit Tests
+
+This app includes unit tests for core logic like search and undo/redo.
+
+To run all tests:
+```bash
+flutter test test/detail_viewmodel_test.dart
+```
+
+---
+
+
 ## 📂 Saved Image Location
 
 Saved memes are stored in:
@@ -83,17 +95,6 @@ This app may request the following permissions at runtime:
 
 - Designed and tested for Android
 - iOS has not been tested due to device unavailability
-
----
-
-## 🧪 Running Unit Tests
-
-This app includes unit tests for core logic like search and undo/redo.
-
-To run all tests:
-```bash
-flutter test test/detail_viewmodel_test.dart
-```
 
 ---
 
