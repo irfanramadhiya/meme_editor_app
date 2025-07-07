@@ -87,13 +87,12 @@ Coming soon!
 This app may request the following permissions at runtime:
 - `READ_EXTERNAL_STORAGE`
 - `WRITE_EXTERNAL_STORAGE`  
-(Only on Android; used for saving images to local storage)
 
 ---
 
 ## 💡 Notes
 
-- Designed and tested for Android
+- Tested for Android
 - iOS has not been tested due to device unavailability
 
 ---
