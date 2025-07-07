@@ -58,11 +58,8 @@ Saved memes are stored in:
 ```
 /Android/data/com.example.meme_editor_app/files/MyImages
 ```
+
 Note: This folder is **not visible in the gallery by default**. You can view the images using a file manager app.
-This is **not the Gallery** by default. You can access it via:
-- A file explorer app
-- Connecting your device to a PC
-- Or programmatically adding it to the MediaStore (planned feature)
 
 ---
 
