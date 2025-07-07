@@ -58,7 +58,7 @@ Saved memes are stored in:
 ```
 /Android/data/com.example.meme_editor_app/files/MyImages
 ```
-
+Note: This folder is **not visible in the gallery by default**. You can view the images using a file manager app.
 This is **not the Gallery** by default. You can access it via:
 - A file explorer app
 - Connecting your device to a PC
@@ -85,7 +85,7 @@ This app may request the following permissions at runtime:
 ## 💡 Notes
 
 - Designed and tested for Android
-- iOS support not tested (may require additional configuration for file saving/sharing)
+- iOS has not been tested due to device unavailability
 
 ---
 
@@ -95,7 +95,7 @@ This app includes unit tests for core logic like search and undo/redo.
 
 To run all tests:
 ```bash
-flutter test
+flutter test test/detail_viewmodel_test.dart
 ```
 
 ---
