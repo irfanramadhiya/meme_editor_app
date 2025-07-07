@@ -65,6 +65,7 @@ class HomeViewModel extends ChangeNotifier {
     } catch (e) {
       if (memeBox.isNotEmpty) {
         memes = memeBox.values.toList();
+        setMemes(memeBox.values.toList());
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Something went wrong please check your internet'),
