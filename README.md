@@ -89,13 +89,18 @@ This app may request the following permissions at runtime:
 
 ---
 
-## 🤝 Contributions
+## 🧪 Running Unit Tests
 
-Pull requests are welcome! If you have ideas or want to extend the app (e.g. GIF support, cloud export), feel free to fork and submit PRs.
+This app includes unit tests for core logic like search and undo/redo.
+
+To run all tests:
+```bash
+flutter test
+```
 
 ---
 
 ## 📄 License
 
 MIT License  
-© 2025 [Your Name or Organization]
+© 2025 Irfan Ramadhiya
